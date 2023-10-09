@@ -1,7 +1,5 @@
 import { setCookie , getCookie} from 'cookies-next';
 export  function doLogin(data){
-    // localStorage.setItem("jwttoken",JSON.stringify(data));
-
     setCookie("jwttoken",JSON.stringify(data));
 }
 

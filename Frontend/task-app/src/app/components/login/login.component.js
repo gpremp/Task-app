@@ -1,15 +1,14 @@
-
 import { useState } from "react";
 import axios from "axios";
-import {doLogin} from "@/app/auth/loginAuth"
+import { doLogin } from "@/app/auth/loginAuth";
 import { useRouter } from "next/navigation";
 import baseUrl from "@/app/baseUrl/baseUrl";
 
 export default function Login({ toggleLogin }) {
-  const router = useRouter()
+  const router = useRouter();
   const [user, setUser] = useState({});
-  
-  const [formErrors, setFormErrors] = useState('');
+
+  const [formErrors, setFormErrors] = useState("");
   function handleChange() {
     toggleLogin();
   }
@@ -23,28 +22,25 @@ export default function Login({ toggleLogin }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setFormErrors("")
-    await axios.post(`${baseUrl}/api/users/auth`, user).then(
-      (response) => {
-        console.log(response);
-        if(response.data.message==="Invalid Email or Password"){
+    setFormErrors("");
+    await axios
+      .post(`${baseUrl}/api/users/auth`, user)
+      .then((response) => {
+        if (response.data.message === "Invalid Email or Password") {
           setFormErrors("invalid email and password");
-        }
-        else if(response.data.message==="logged in successfully"){
-          console.log(response.data.data);
+        } else if (response.data.message === "logged in successfully") {
           doLogin(response.data.data);
-          router.push('/dashboard')
-
+          router.push("/dashboard");
         }
-      }
-    ).catch((err)=>{
-      console.log(err)
-    })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   const buttonStyle = {
-    cursor: "pointer", // Change cursor to pointer on hover
-    textDecoration: "underline", // Underline the text
-    color: "blue", // Change text color
+    cursor: "pointer",
+    textDecoration: "underline",
+    color: "blue",
   };
   return (
     <div className="container mt-5">
@@ -66,7 +62,7 @@ export default function Login({ toggleLogin }) {
                     onChange={handleInputChange}
                     required
                   />
-                   <h6 style={{color:'red'}}>{formErrors}</h6>
+                  <h6 style={{ color: "red" }}>{formErrors}</h6>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">

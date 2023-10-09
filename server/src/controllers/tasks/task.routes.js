@@ -24,7 +24,7 @@ function verifyToken(req,res,next){
 	}
 	else{
 		res.send({
-			message : 'Token is not validweee' 
+			message : 'Token is not valid' 
 		})
 	}
 }
