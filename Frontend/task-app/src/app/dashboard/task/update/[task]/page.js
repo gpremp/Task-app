@@ -57,6 +57,10 @@ export default function UpdateTask(params) {
       isSubmit = false;
       errors.name = "*Number not allowed";
     }
+    if (!(values.description)) {
+      isSubmit = false;
+      errors.description = "*description cannot be empty";
+    }
     return errors;
   };
   useEffect(() => {
@@ -98,6 +102,7 @@ export default function UpdateTask(params) {
               value={task.description}
               onChange={handleChange}
             ></textarea>
+             <h6 style={{ color: "red" }}>{formErrors.description}</h6>
           </div>
           <button type="submit" className="btn btn-success">
             Update

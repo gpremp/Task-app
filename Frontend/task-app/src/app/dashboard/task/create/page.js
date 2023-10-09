@@ -58,6 +58,10 @@ export default function CreateTask() {
       isSubmit = false;
       errors.name = "*Number not allowed";
     }
+    if (!(values.description)) {
+      isSubmit = false;
+      errors.description = "*description cannot be empty";
+    }
     return errors;
   };
 
@@ -73,6 +77,7 @@ export default function CreateTask() {
               className="form-control"
               name="title"
               onChange={handleChange}
+              required
             />
             <h6 style={{ color: "red" }}>{formErrors.name}</h6>
           </div>
@@ -85,6 +90,7 @@ export default function CreateTask() {
               name="description"
               onChange={handleChange}
             ></textarea>
+            <h6 style={{ color: "red" }}>{formErrors.description}</h6>
           </div>
           <button type="submit" className="btn btn-success">
             Submit
